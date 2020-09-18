@@ -1,0 +1,19 @@
+<html lang="en">
+<head>
+    {% load static %}
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="{% static "css/landing.css" %}">
+    <title>Document</title>
+</head>
+<body>
+    <form action="/" class="login">
+      <header>Login</header>
+      <div class="field"><span class="fa fa-user"></span><input type="text" placeholder="Email or User Name"></div>
+      <div class="field"><span class="fa fa-lock"></span><input type="password" placeholder="Password"></div>
+      <div class="forgot-password"><a href="/">Forgot password?</a></div>
+      <input type="submit" class="submit" value="LOGIN"></input>
+    <span class="logn-form-copy">Don't have an account? <a href="signup.html" class="login-form__sign-up">Sign up</a></span>
+    </form>
+  </body>
+</html>

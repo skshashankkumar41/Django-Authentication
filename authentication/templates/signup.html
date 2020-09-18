@@ -1,0 +1,22 @@
+<html>
+  <head>
+    {% load static %}
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="{% static "css/signup.css" %}">
+    <title>Document</title>
+  </head>
+  <body>
+    <form action="/" class="login">
+      <header>Create Account</header>
+      <div class="field"><span class="fa fa-envelope"></span><input type="text" placeholder="Name"></div>
+      <div class="field"><span class="fa fa-envelope"></span><input type="text" placeholder="Email Address"></div>
+      <div class="field"><span class="fa fa-envelope"></span><input type="text" placeholder="Mobile No."></div>
+      <div class="field"><span class="fa fa-user"></span><input type="text" placeholder="User Name"></div>
+      <div class="field"><span class="fa fa-lock"></span><input type="password" placeholder="Password"></div>
+      <div class="forgot-password">I agree to <a href="/">T&C's</a></div>
+      <input type="submit" class="submit" value="Sign up"></input>
+    <span class="logn-form-copy">Already have an account? <a href="/" class="login-form__sign-up">Login</a></span>
+    </form>
+  </body>
+</html>
