@@ -1,2 +1,2 @@
 # Django-Authentication
-A Django Project with Modals and Authentication
+A Django Project with Models and Authentication
