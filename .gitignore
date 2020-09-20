@@ -1,2 +1,3 @@
 /auth
 /authentication/authentication/secret.txt
+*.pyc
