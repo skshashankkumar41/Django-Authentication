@@ -2,7 +2,7 @@ from django.db import models
 
 # Create your models here.
 class Register(models.Model):
-    userid = models.AutoField(primary_key=True,default=1)
+    userid = models.AutoField(primary_key=True)
     name = models.CharField(max_length=200,null=True)
     username = models.CharField(max_length=200,null=True)
     password = models.CharField(max_length=200,null=True)
