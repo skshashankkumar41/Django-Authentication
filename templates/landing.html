@@ -7,10 +7,11 @@
     <title>Document</title>
 </head>
 <body>
-    <form action="/" class="login">
+    <form action="/login/" class="login" method="post">
+    {% csrf_token %}
       <header>Login</header>
-      <div class="field"><span class="fa fa-user"></span><input type="text" placeholder="Email or User Name"></div>
-      <div class="field"><span class="fa fa-lock"></span><input type="password" placeholder="Password"></div>
+      <div class="field"><span class="fa fa-user"></span><input type="text" placeholder="Email or User Name" name="username"></div>
+      <div class="field"><span class="fa fa-lock"></span><input type="password" placeholder="Password" name="password"></div>
       <div class="forgot-password"><a href="/">Forgot password?</a></div>
       <input type="submit" class="submit" value="LOGIN"></input>
     <span class="logn-form-copy">Don't have an account? <a href="signup.html" class="login-form__sign-up">Sign up</a></span>

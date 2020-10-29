@@ -9,3 +9,6 @@ class Register(models.Model):
     mobile = models.CharField(max_length=10,null=True)
     email = models.EmailField()
     date_created = models.DateTimeField(auto_now_add=True)
+
+    def __str__(self):
+        return self.username

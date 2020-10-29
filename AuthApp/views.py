@@ -1,5 +1,5 @@
-from django.shortcuts import render
-
+from django.shortcuts import render, redirect
+from .models import Register
 # Create your views here.
 
 def landing(request):
@@ -7,3 +7,27 @@ def landing(request):
 
 def signup(request):
     return render(request,'signup.html')
+
+def register(request):
+    name = request.POST['name']
+    email = request.POST['email']
+    username = request.POST['username']
+    password = request.POST['password']
+    mobile = request.POST['mobile']
+
+    reg = Register(name=name,email=email,username=username,password=password,mobile=mobile)
+    reg.save()
+
+    return render(request,'landing.html')
+
+def login(request):
+    username = request.POST['username']
+    password = request.POST['password']
+
+    data = Register.objects.filter(username=username)
+
+    if len(list(data)) > 0:
+        if data[0].password == password:
+            return redirect("https://skshashankkumar41.github.io/")
+
+    return render(request,'landing.html')
