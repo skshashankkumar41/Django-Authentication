@@ -1,5 +1,6 @@
 from django.shortcuts import render, redirect
 from .models import Register
+from .helper import *
 # Create your views here.
 
 def landing(request):
@@ -15,10 +16,15 @@ def register(request):
     password = request.POST['password']
     mobile = request.POST['mobile']
 
-    reg = Register(name=name,email=email,username=username,password=password,mobile=mobile)
-    reg.save()
+    if not checkUserNameExist(username):
+        reg = Register(name=name,email=email,username=username,password=password,mobile=mobile)
+        reg.save()
+        return render(request,'landing.html')
 
-    return render(request,'landing.html')
+    else:
+        return render(request,'landing.html')
+
+    
 
 def login(request):
     username = request.POST['username']
@@ -26,7 +32,7 @@ def login(request):
 
     data = Register.objects.filter(username=username)
 
-    if len(list(data)) > 0:
+    if len(data) > 0:
         if data[0].password == password:
             return redirect("https://skshashankkumar41.github.io/")
 
