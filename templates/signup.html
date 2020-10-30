@@ -7,9 +7,10 @@
     <title>Document</title>
   </head>
   <body>
-    <form action="/signup/" class="login" method="post">
+    <form action="/register/" class="login" method="post">
     {% csrf_token %}
       <header>Create Account</header>
+      <p style="text-align:left;margin-bottom:1em;color:red">{{tag}}</p>
       <div class="field"><span class="fa fa-envelope"></span><input type="text" placeholder="Name" name='name'></div>
       <div class="field"><span class="fa fa-envelope"></span><input type="text" placeholder="Email Address" name="email"></div>
       <div class="field"><span class="fa fa-envelope"></span><input type="text" placeholder="Mobile No." name="mobile"></div>

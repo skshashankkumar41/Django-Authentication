@@ -22,9 +22,7 @@ def register(request):
         return render(request,'landing.html')
 
     else:
-        return render(request,'landing.html')
-
-    
+        return render(request,'signup.html',{'tag':'Username already Exists'})
 
 def login(request):
     username = request.POST['username']
@@ -36,4 +34,7 @@ def login(request):
         if data[0].password == password:
             return redirect("https://skshashankkumar41.github.io/")
 
-    return render(request,'landing.html')
+        else:
+            return render(request,'landing.html',{'tag':'Incorrect Password'})
+
+    return render(request,'landing.html',{'tag':'Username doesn\'t exists'})

@@ -10,11 +10,12 @@
     <form action="/login/" class="login" method="post">
     {% csrf_token %}
       <header>Login</header>
+      <p style="text-align:left;margin-bottom:1em;color:red">{{tag}}</p>
       <div class="field"><span class="fa fa-user"></span><input type="text" placeholder="Email or User Name" name="username"></div>
       <div class="field"><span class="fa fa-lock"></span><input type="password" placeholder="Password" name="password"></div>
       <div class="forgot-password"><a href="/">Forgot password?</a></div>
       <input type="submit" class="submit" value="LOGIN"></input>
-    <span class="logn-form-copy">Don't have an account? <a href="signup.html" class="login-form__sign-up">Sign up</a></span>
+    <span class="logn-form-copy">Don't have an account? <a href="{% url 'signup' %}"class="login-form__sign-up">Sign up</a></span>
     </form>
   </body>
 </html>
