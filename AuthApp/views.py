@@ -3,6 +3,7 @@ from django.urls import reverse
 from .models import *
 from .helper import *
 from datetime import datetime
+import pytz
 # Create your views here.
 
 def landing(request):
@@ -12,13 +13,14 @@ def signup(request):
     return render(request,'signup.html')
 
 def renderDashboard(request):
+    tz = pytz.timezone('Asia/Kolkata')
     username = request.session.get('username')
     user_data = Register.objects.filter(username=username)
     login_data = LoginStats.objects.filter(user=username)
     loginCounts = len(login_data)
     lastLogin = login_data.order_by('-login_time').first().login_time
-    lastLogin = datetime.fromtimestamp(lastLogin).strftime("%d/%m/%Y, %H:%M:%S")
-    userCreated = datetime.fromtimestamp(user_data.first().date_created).strftime("%d/%m/%Y, %H:%M:%S")
+    lastLogin = pytz.utc.localize(datetime.fromtimestamp(lastLogin)).astimezone(tz).strftime("%d/%m/%Y, %H:%M:%S")
+    userCreated = pytz.utc.localize(datetime.fromtimestamp(user_data.first().date_created)).astimezone(tz).strftime("%d/%m/%Y, %H:%M:%S")
     
     return render(request,'dashboard.html',{'username':username,'login_counts':loginCounts,'last_login':lastLogin,'user_created':userCreated})
 
@@ -28,7 +30,7 @@ def register(request):
     username = request.POST['username']
     password = request.POST['password']
     mobile = request.POST['mobile']
-    date_created = datetime.timestamp(datetime.now())
+    date_created = datetime.timestamp(datetime.utcnow())
 
     if not checkUserNameExist(username):
         reg = Register(name=name,email=email,username=username,password=password,mobile=mobile,date_created=date_created)
