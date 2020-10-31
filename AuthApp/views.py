@@ -1,6 +1,9 @@
 from django.shortcuts import render, redirect
-from .models import Register
+from django.urls import reverse
+from .models import *
 from .helper import *
+from django.http import HttpResponse, HttpResponseNotFound, Http404,  HttpResponseRedirect
+from datetime import datetime
 # Create your views here.
 
 def landing(request):
@@ -15,11 +18,12 @@ def register(request):
     username = request.POST['username']
     password = request.POST['password']
     mobile = request.POST['mobile']
+    date_created = datetime.timestamp(datetime.now())
 
     if not checkUserNameExist(username):
-        reg = Register(name=name,email=email,username=username,password=password,mobile=mobile)
+        reg = Register(name=name,email=email,username=username,password=password,mobile=mobile,date_created=date_created)
         reg.save()
-        return render(request,'landing.html')
+        return redirect('home')
 
     else:
         return render(request,'signup.html',{'tag':'Username already Exists'})
@@ -31,10 +35,12 @@ def login(request):
     data = Register.objects.filter(username=username)
 
     if len(data) > 0:
-        if data[0].password == password:
+        if data.first().password == password:
+            updateLoginTime(data.first())
             return redirect("https://skshashankkumar41.github.io/")
 
         else:
             return render(request,'landing.html',{'tag':'Incorrect Password'})
 
     return render(request,'landing.html',{'tag':'Username doesn\'t exists'})
+
