@@ -14,8 +14,8 @@ def updateLoginTime(object):
 
 def getLastLogin(object):
     try:
-        lastLogin = login_data.order_by('-login_time')[1].login_time
+        lastLogin = object.order_by('-login_time')[1].login_time
     except:
-        lastLogin = login_data.order_by('-login_time').first().login_time
+        lastLogin = object.order_by('-login_time').first().login_time
 
     return lastLogin

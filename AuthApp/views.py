@@ -18,7 +18,7 @@ def renderDashboard(request):
     user_data = Register.objects.filter(username=username)
     login_data = LoginStats.objects.filter(user=username)
     loginCounts = len(login_data)
-    lastLogin = login_data.order_by('-login_time').first().login_time
+    lastLogin = getLastLogin(login_data)
     lastLogin = pytz.utc.localize(datetime.fromtimestamp(lastLogin)).astimezone(tz).strftime("%d/%m/%Y, %H:%M:%S")
     userCreated = pytz.utc.localize(datetime.fromtimestamp(user_data.first().date_created)).astimezone(tz).strftime("%d/%m/%Y, %H:%M:%S")
     
