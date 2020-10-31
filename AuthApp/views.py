@@ -2,7 +2,6 @@ from django.shortcuts import render, redirect
 from django.urls import reverse
 from .models import *
 from .helper import *
-from django.http import HttpResponse, HttpResponseNotFound, Http404,  HttpResponseRedirect
 from datetime import datetime
 # Create your views here.
 
@@ -11,6 +10,17 @@ def landing(request):
 
 def signup(request):
     return render(request,'signup.html')
+
+def renderDashboard(request):
+    username = request.session.get('username')
+    user_data = Register.objects.filter(username=username)
+    login_data = LoginStats.objects.filter(user=username)
+    loginCounts = len(login_data)
+    lastLogin = login_data.order_by('-login_time').first().login_time
+    lastLogin = datetime.fromtimestamp(lastLogin).strftime("%d/%m/%Y, %H:%M:%S")
+    userCreated = datetime.fromtimestamp(user_data.first().date_created).strftime("%d/%m/%Y, %H:%M:%S")
+    
+    return render(request,'dashboard.html',{'username':username,'login_counts':loginCounts,'last_login':lastLogin,'user_created':userCreated})
 
 def register(request):
     name = request.POST['name']
@@ -24,7 +34,6 @@ def register(request):
         reg = Register(name=name,email=email,username=username,password=password,mobile=mobile,date_created=date_created)
         reg.save()
         return redirect('home')
-
     else:
         return render(request,'signup.html',{'tag':'Username already Exists'})
 
@@ -37,7 +46,8 @@ def login(request):
     if len(data) > 0:
         if data.first().password == password:
             updateLoginTime(data.first())
-            return redirect("https://skshashankkumar41.github.io/")
+            request.session['username'] = data.first().username
+            return redirect("dashboard")
 
         else:
             return render(request,'landing.html',{'tag':'Incorrect Password'})
