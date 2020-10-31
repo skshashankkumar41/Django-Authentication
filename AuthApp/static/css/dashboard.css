@@ -6,6 +6,16 @@ body{
 }
 
 
+#logout-button{
+
+    margin-right: 15px;
+    margin-top: 15px;
+    margin-bottom: 10px;
+
+
+}
+
+
 #total-orders{
     background-color: #4cb4c7;
 }
