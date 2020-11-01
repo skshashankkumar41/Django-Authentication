@@ -12,6 +12,14 @@ def landing(request):
 def signup(request):
     return render(request,'signup.html')
 
+def logout(request):
+    username = request.session.get('username')
+    login_data = LoginStats.objects.filter(user=username).order_by('-login_time').first()
+    login_data.logout_time = datetime.timestamp(datetime.utcnow())
+    login_data.save()
+    del request.session['username']
+    return redirect('home')
+
 def renderDashboard(request):
     tz = pytz.timezone('Asia/Kolkata')
     username = request.session.get('username')
