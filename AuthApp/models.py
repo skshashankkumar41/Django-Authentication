@@ -15,6 +15,8 @@ class Register(models.Model):
 class LoginStats(models.Model):
     user = models.ForeignKey(Register, on_delete=models.CASCADE)
     login_time = models.FloatField(null=True)
+    logout_time = models.FloatField(null=True)
+
 
     def __str__(self):
         return self.user.username
