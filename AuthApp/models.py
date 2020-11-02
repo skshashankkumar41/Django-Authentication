@@ -10,6 +10,7 @@ class Register(models.Model):
     city = models.CharField(max_length=200,null=True)
     country = models.CharField(max_length=200,null=True)
     state = models.CharField(max_length=200,null=True)
+    org = models.CharField(max_length=200,null=True)
     timezone = models.CharField(max_length=200,null=True)
     date_created = models.FloatField()
 
