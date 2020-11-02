@@ -1,3 +1,5 @@
 /auth
 /authentication/authentication/secret.txt
 *.pyc
+*.ipynb
+debug.log
