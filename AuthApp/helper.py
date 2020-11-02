@@ -7,6 +7,12 @@ def checkUserNameExist(username):
 
     return True if len(data) > 0 else False
 
+def updateLoginTime(object):
+    login_time = datetime.timestamp(datetime.utcnow())
+    stats = LoginStats(user=object, login_time=login_time)
+    stats.save()
+    return None
+
 def getLastLogin(object):
     try:
         lastLogin = object.order_by('-login_time')[1].login_time
@@ -25,10 +31,3 @@ def getIpLocation():
         "timezone": data.get('timezone'),
         "org": data.get('org')
     }
-
-def updateLoginTime(object):
-    ipData = getIpLocation()
-    login_time = datetime.timestamp(datetime.utcnow())
-    stats = LoginStats(user=object, login_time=login_time,city=ipData['city'],country=ipData['country'],state=ipData['state'],timezone=ipData['timezone'],org=ipData['org'])
-    stats.save()
-    return None
