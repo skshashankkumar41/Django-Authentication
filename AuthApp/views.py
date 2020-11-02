@@ -39,9 +39,10 @@ def register(request):
     password = request.POST['password']
     mobile = request.POST['mobile']
     date_created = datetime.timestamp(datetime.utcnow())
+    ipData = getIpLocation()
 
     if not checkUserNameExist(username):
-        reg = Register(name=name,email=email,username=username,password=password,mobile=mobile,date_created=date_created)
+        reg = Register(name=name,email=email,username=username,password=password,mobile=mobile,date_created=date_created,city=ipData['city'],country=ipData['country'],state=ipData['state'],timezone=ipData['timezone'],org=ipData['org'])
         reg.save()
         return redirect('home')
     else:
