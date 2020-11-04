@@ -10,15 +10,14 @@
 </head>
 <body>
 
-<form action="/logout/" method="post">
-{% csrf_token %}
-<div id='logout-button' align="right">
-<button type="submit" class="btn btn-info btn-lg">Logout</button>
-</div>
-</form>
+<nav class="navbar justify-content-between">
+	<p class="navbar-brand mx-auto">Hi, {{username}}</p>
+	<form action="/logout/" method="post">
+		{% csrf_token %}
+		<button id="logout-button" type="submit" class="btn btn-info btn-lg">Logout</button>
+		</form>
+	</nav>
 
-
-    <br>
 
 <div class="row">
 	<div class="col">

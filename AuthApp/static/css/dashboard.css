@@ -1,20 +1,25 @@
-#logo{
-}
-
 body{
     background-color: #ebeff5;
 }
 
-
-#logout-button{
-
-    margin-right: 15px;
-    margin-top: 15px;
-    margin-bottom: 10px;
-
-
+.navbar-brand{
+    font-size:40px;
+    font-weight: 500;
+    color:  #054f5c;
+}
+.navbar{
+    background-color: #ebeff5;
 }
 
+.row{
+    margin:auto;
+    margin-top: 50px;
+	
+}
+
+#logout-button{
+    margin-right: 15px;
+}
 
 #total-orders{
     background-color: #4cb4c7;
