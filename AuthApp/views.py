@@ -21,10 +21,11 @@ def logout(request):
     return redirect('home')
 
 def renderDashboard(request):
-    tz = pytz.timezone('Asia/Kolkata')
     username = request.session.get('username')
     user_data = Register.objects.filter(username=username)
     login_data = LoginStats.objects.filter(user=username)
+    timezone = user_data.first().timezone
+    tz = pytz.timezone(timezone)
     loginCounts = len(login_data)
     lastLogin = getLastLogin(login_data)
     lastLogin = pytz.utc.localize(datetime.fromtimestamp(lastLogin)).astimezone(tz).strftime("%d/%m/%Y, %H:%M:%S")
