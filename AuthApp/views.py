@@ -24,7 +24,7 @@ def renderDashboard(request):
     username = request.session.get('username')
     user_data = Register.objects.filter(username=username)
     login_data = LoginStats.objects.filter(user=username)
-    timezone = user_data.first().timezone
+    timezone = login_data.first().timezone
     tz = pytz.timezone(timezone)
     loginCounts = len(login_data)
     lastLogin = getLastLogin(login_data)
